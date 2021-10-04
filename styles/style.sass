@@ -1,0 +1,94 @@
+*, *:before, *:after
+   box-sizing: border-box
+
+html, body, div, span, object, iframe, figure, h1, h2, h3, h4, h5, h6, p, blockquote, pre, 
+a, code, em, img, small, strike, strong, sub, sup, tt, b, u, i, ol, ul, li, fieldset, 
+form, label, table, caption, tbody, tfoot, thead, tr, th, td, main, canvas, embed,
+footer, header, nav, section, video
+   margin: 0
+   padding: 0
+   border: 0
+   font-size: 100%
+   font: inherit
+   vertical-align: baseline
+   text-rendering: optimizeLegibility
+   -webkit-font-smoothing: antialiased
+   text-size-adjust: none
+
+footer, header, nav, section, main
+   display: block
+
+html, body
+   height: 100%
+   overflow-y: hidden
+
+ol, ul
+   list-style: none
+
+blockquote, q
+   quotes: none
+
+blockquote:before, blockquote:after, q:before, q:after
+   content: ''
+   content: none
+
+input
+   -webkit-appearance: none
+   border-radius: 0
+
+body 
+   background-image: url('../misc/imgs/background.jpg')
+   background-repeat: no-repeat
+   background-size: cover
+
+.container 
+   display: flex
+   flex-direction: row
+   justify-content: center
+   align-items: center
+
+   height: 100%
+
+
+
+table 
+   display: flex
+   justify-content: center
+   align-items: center
+
+   width: fit-content
+   height: fit-content
+
+   background-color: silver
+   border: 5px solid silver
+   border-radius: 5px
+
+tr
+   border: 5px solid black
+   border-radius: 5px
+
+td 
+   width: 27px
+   height: 27px
+
+   font-size: 1em
+   font-weight: 900
+   text-align: center
+   vertical-align: middle
+
+   background-color: grey
+   border: 2px solid rgba(0,0,0,.3)
+
+   cursor: pointer
+   
+   img
+      width: 25px
+      height: 25px
+      display: block
+      margin: 0 auto
+
+.clicked 
+   background-color: white
+   border: none
+   cursor: default
+   pointer-events: none
