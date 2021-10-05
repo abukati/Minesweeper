@@ -177,6 +177,7 @@ body {
 
 .board-indicators .smiley img {
   width: 25px;
+  cursor: pointer;
 }
 
 table {

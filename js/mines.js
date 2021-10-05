@@ -2,6 +2,8 @@
 
 // Board mining configuration
 
+var gMines = []
+
 function setMinesPos(matI, matJ) {
    for (var i = 0; i < gLevel.mines; i++) {
       var cell = {

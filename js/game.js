@@ -2,6 +2,26 @@
 
 // Game progression control functions
 
+var elSmiley = document.querySelector('.smiley')
+var elHints = document.querySelector('.hints')
+var elBombs = document.querySelector('.bombs')
+var elUndo = document.querySelector('.undo')
+var elSafeBtn = document.querySelector('.safe-click')
+
+
+var gGame = {
+   isOn: false,
+   shownCount: 0,
+   markCount: 0,
+   secsPassed: 0,
+   isSafe: false,
+   isWin: false,
+   isHint: false
+}
+
+var gSafe = 3
+
+
 function initGame() {
    buildBoard()
    gLevel.size == 4 ? renderLives(2) : renderLives(3)
@@ -17,7 +37,6 @@ function gameStarter(elCell, i, j) {
    minePositions = setMinesPos(i, j)
    setMines(gBoard, minePositions)
    cellClicked(elCell, i, j)
-   // renderSafeClick()
 }
 
 
@@ -44,6 +63,7 @@ function checkGame() {
 
 
 function resetGame() {
+   window.localStorage.removeItem('bestScore')
    gGame = {
       isOn: false,
       isWin: false,
@@ -69,9 +89,3 @@ function renderLives(lives) {
    }
    elLives.innerHTML = strHTML
 }
-
-
-// function renderSafeClick() {
-//    var elSafeBtn = document.querySelector('.safe-click')
-//    elSafeBtn.innerHTML = `<button class="safe-btn" onclick="safeClickMode()">Safe Click</button>\n<p>${gSafe} clicks available</p>`
-// }

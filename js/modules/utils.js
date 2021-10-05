@@ -1,11 +1,28 @@
-// export default { getRandNum, createMat, printMat, countNegs, timeToString,
-//    startTimer, pauseTimer, resetTimer, print }
-
-
-// Commonly used functions
-
 function getRandNum(min, max) {
    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
+function getNeighbors(cell) {
+   var row = parseInt(cell.id[0])
+   var col = parseInt(cell.id[1])
+   var negs = []
+   negs.push((row - 1) + '' + (col - 1))
+	negs.push((row - 1) + '' + col)
+	negs.push((row - 1) + '' + (col + 1))
+	negs.push(row + '' + (col - 1))
+	negs.push(row + '' + (col + 1))
+	negs.push((row + 1) + '' + (col - 1))
+	negs.push((row + 1) + '' + col)
+	negs.push((row + 1) + '' + (col + 1))
+   
+   for (var i = 0; i < negs.length; i++) {
+      if (negs[i].length > 2) {
+         negs.splice(i, 1)
+         i--
+      }
+   }
+   return negs
 }
 
 
@@ -33,7 +50,7 @@ function printMat(mat, selector) {
       strHTML += '<tr>'
       for (var j = 0; j < mat[0].length; j++) {
          var className = `cell cell-${i}-${j}`
-         strHTML += `<td class="${className}" onclick="cellClicked(this, ${i}, ${j})" 
+         strHTML += `<td class="${className}" id="${i}${j}" onclick="cellClicked(this, ${i}, ${j})" 
          oncontextmenu="cellMarked(this, ${i}, ${j})"></td>`
       }
       strHTML += '</tr>'
@@ -74,7 +91,6 @@ function print(txt) {
 function startTimer() {
    startTime = Date.now() - elapsedTime
    timerInterval = setInterval(() => {
-      checkGame()
       elapsedTime = Date.now() - startTime
       print(timeToString(elapsedTime))
    })
@@ -82,6 +98,16 @@ function startTimer() {
 
 function pauseTimer() {
    clearInterval(timerInterval)
+   if (gGame.isWin) {
+      if (localStorage.getItem('bestScore') == null) {
+         localStorage.setItem('bestScore', elapsedTime)
+         elBestScores.innerHTML = `<li>${timeToString(elapsedTime)}</li>`
+      }
+      if (localStorage.getItem('bestScore') > elapsedTime && localStorage.length <= 3) {
+         localStorage.setItem('bestScore', elapsedTime)
+         elBestScores.innerHTML += `<li>${timeToString(elapsedTime)}</li>`
+      }
+   }
    timerInterval = null
 }
 
