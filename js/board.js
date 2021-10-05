@@ -74,6 +74,7 @@ function cellMarked(elCell, i, j) {
       elCell.innerText = ''
       if (gBoard[i][j].isMine) gGame.markCount--
    }
+   checkGame()
 }
 
 
