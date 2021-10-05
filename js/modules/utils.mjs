@@ -1,7 +1,8 @@
-// export { getRandNum, createMat as buildBoard, printMat as renderBoard, 
-//    countNegs as setMinesNegsCount, timeToString, startTimer, pauseTimer,
-//     resetTimer, print }
+// export default { getRandNum, createMat, printMat, countNegs, timeToString,
+//    startTimer, pauseTimer, resetTimer, print }
 
+
+// Commonly used functions
 
 function getRandNum(min, max) {
    return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -43,24 +44,6 @@ function printMat(mat, selector) {
 }
 
 
-function countNegs(mat, rowIdx, colIdx) {
-   var count = 0
-   for (var i = rowIdx - 1; i <= rowIdx + 1; i++) {
-      if (i < 0 || i > mat.length - 1) {
-         continue
-      }
-      for (var j = colIdx - 1; j <= colIdx + 1; j++) {
-         if (j < 0 || j > mat[0].length - 1) {
-            continue
-         }
-         if (i === rowIdx && j === colIdx) continue
-         if (mat[i][j] === live) count++
-      }
-   }
-   return count
-}
-
-
 function timeToString(time) {
    var diffInHrs = time / 3600000
    var hh = Math.floor(diffInHrs)
@@ -76,8 +59,6 @@ function timeToString(time) {
    
    var formattedMM = mm.toString().padStart(2, '0')
    var formattedSS = ss.toString().padStart(2, '0')
-
-   gGame.secsPassed = ss
    
    return `${formattedMM}:${formattedSS}`
 }

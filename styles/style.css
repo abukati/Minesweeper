@@ -71,6 +71,114 @@ body {
   height: 100%;
 }
 
+.difficulty-selector {
+  display: inline-block;
+  position: relative;
+  margin: 3em 2em;
+}
+
+.difficulty-selector::after {
+  content: '>';
+  font: 20px 'Consolas', monospace;
+  font-weight: 900;
+  color: black;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+  margin-top: 9px;
+  position: absolute;
+  right: 8px;
+}
+
+.difficulty-selector select {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  display: inline-block;
+  width: 150px;
+  height: 40px;
+  padding: 0 10px;
+  font-size: 1em;
+  font-weight: 600;
+  background-color: #fff;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+.difficulty-selector select option {
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.difficulty-selector select:hover {
+  cursor: pointer;
+}
+
+.game-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.top-indicators, .bottom-indicators {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  width: inherit;
+  height: 30px;
+  font-size: .9em;
+  font-weight: 700;
+}
+
+.bombs p img {
+  width: 20px;
+}
+
+.board-indicators {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: silver;
+  border-radius: 5px 5px 0 0;
+}
+
+.board-indicators .lives {
+  margin-left: 3px;
+  margin-top: 10px;
+  position: absolute;
+}
+
+.board-indicators .smiley {
+  margin: 0 auto;
+  width: 25px;
+  height: 25px;
+  margin-top: 5px;
+}
+
+.board-indicators .smiley img {
+  width: 25px;
+}
+
 table {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -81,19 +189,13 @@ table {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
   background-color: silver;
-  border: 5px solid silver;
-  border-radius: 5px;
+  border: 3px solid silver;
+  border-radius: 0 0 5px 5px;
 }
 
 tr {
-  border: 5px solid black;
+  border: 3px solid black;
   border-radius: 5px;
 }
 
@@ -105,7 +207,7 @@ td {
   text-align: center;
   vertical-align: middle;
   background-color: grey;
-  border: 2px solid rgba(0, 0, 0, 0.3);
+  border: 2.5px solid rgba(0, 0, 0, 0.3);
   cursor: pointer;
 }
 
@@ -121,5 +223,12 @@ td img {
   border: none;
   cursor: default;
   pointer-events: none;
+}
+
+.scoreboard {
+  height: 200px;
+  margin-left: 3em;
+  font-size: 1em;
+  font-weight: 600;
 }
 /*# sourceMappingURL=style.css.map */
