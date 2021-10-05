@@ -33,8 +33,8 @@ function initGame() {
 function gameStarter(elCell, i, j) {
    startTimer()
    var minePositions = [] 
-   gGame.isOn = true
    minePositions = setMinesPos(i, j)
+   gGame.isOn = true
    setMines(gBoard, minePositions)
    cellClicked(elCell, i, j)
 }
