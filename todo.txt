@@ -1,0 +1,5 @@
+* Implement safe click
+* Improve undo behavior
+* Add 7boom game mode
+* Mousedown evt on cells
+* Rewrite css
