@@ -4,8 +4,8 @@
 
 var gMines = []
 
-function setMinesPos(matI, matJ) {
-   for (var i = 0; i < gLevel.mines; i++) {
+function setMinesPos(matI, matJ, mineCount) {
+   for (var i = 0; i < mineCount; i++) {
       var cell = {
          i: getRandNum(0, gLevel.size - 1),
          j: getRandNum(0, gLevel.size - 1)
@@ -22,9 +22,28 @@ function setMinesPos(matI, matJ) {
 }
 
 
+function setNewMinePos(matI, matJ, mineCount) {
+
+   for (var i = 0; i < mineCount; i++) {
+      do {
+         var cell = {
+            i: getRandNum(0, gLevel.size - 1),
+            j: getRandNum(0, gLevel.size - 1)
+         }
+      } while (matI == cell.i && matJ == cell.j)
+   }
+   return cell
+}
+
+
 function setMines(board, minesPos) {
    for (var i = 0; i < minesPos.length ; i++) {
-      board[minesPos[i].i][minesPos[i].j].isMine = true
+      if (!board[minesPos[i].i][minesPos[i].j].isMine) {
+         board[minesPos[i].i][minesPos[i].j].isMine = true
+      } else {
+         var newPos = setNewMinePos(minesPos[i].i, minesPos[i].j, 1)
+         board[newPos.i][newPos.j].isMine = true
+      }
    }
 }
 

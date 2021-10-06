@@ -105,34 +105,36 @@ body
    font-weight: 700
 
 .bombs p
+   font-size: 1.3em
    img
-      width: 20px
+      width: 25px
 
 .board-indicators 
    display: flex
-   flex-direction: row
    justify-content: space-between
-   align-items: center
+   align-items: flex-end
+
+   width: 100%
 
    background-color: silver
    border-radius: 5px 5px 0 0
 
    .lives
       margin-left: 3px
-      margin-top: 10px
-      position: absolute
+      width: 20%
 
-   .smiley 
-      margin: 0 auto
-      width: 25px
-      height: 25px
+   .smiley
       margin-top: 5px
 
       img
          width: 25px
          cursor: pointer
-   
+
    .hints
+         width: 20%
+         img
+            cursor: pointer
+
 
 table 
    display: flex
@@ -148,8 +150,8 @@ tr
    border-radius: 5px
 
 td 
-   width: 27px
-   height: 27px
+   width: 35px
+   height: 35px
 
    font-size: 1em
    font-weight: 900
@@ -162,8 +164,8 @@ td
    cursor: pointer
    
    img
-      width: 25px
-      height: 25px
+      width: 33px
+      height: 32px
       display: block
       margin: 0 auto
 
@@ -172,7 +174,6 @@ td
    border: none
    cursor: default
    pointer-events: none
-
 
 .scoreboard
    height: 200px

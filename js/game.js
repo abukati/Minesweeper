@@ -3,7 +3,6 @@
 // Game progression control functions
 
 var elSmiley = document.querySelector('.smiley')
-var elHints = document.querySelector('.hints')
 var elBombs = document.querySelector('.bombs')
 var elUndo = document.querySelector('.undo')
 var elSafeBtn = document.querySelector('.safe-click')
@@ -13,18 +12,29 @@ var gGame = {
    isOn: false,
    shownCount: 0,
    markCount: 0,
-   secsPassed: 0,
+   isCustom: false,
    isSafe: false,
    isWin: false,
-   isHint: false
+   isHint: false,
 }
 
+var gUndo = {
+   cellInf: [],
+   boardStat: []
+}
+
+var gMinesToPlace
 var gSafe = 3
+var gHintCount = 3
 
 
 function initGame() {
+   if (window.performance.getEntriesByType('navigation').map((nav) => nav.type).includes('reload')) {
+      window.localStorage.clear()
+   }
    buildBoard()
    gLevel.size == 4 ? renderLives(2) : renderLives(3)
+   renderHints(gHintCount)
    elSmiley.innerHTML = SMILEY
    elBombs.innerHTML = `<p>${MINE}x${gLevel.mines}</p>`
 }
@@ -33,47 +43,56 @@ function initGame() {
 function gameStarter(elCell, i, j) {
    startTimer()
    var minePositions = [] 
+   minePositions = gGame.isCustom ? gMines : setMinesPos(i, j, gLevel.mines)
    gGame.isOn = true
-   minePositions = setMinesPos(i, j)
    setMines(gBoard, minePositions)
    cellClicked(elCell, i, j)
 }
 
 
 function checkGame() {
-   if (gGame.shownCount == (gLevel.size**2)) {
-      pauseTimer()
-      gGame.isWin = true
-      gGame.isOn = false
-      elSmiley.innerHTML = WIN_SMILEY
-   }
-   if (gLevel.mines == gGame.markCount) {
-      pauseTimer()
-      gGame.isWin = true
-      gGame.isOn = false
-      elSmiley.innerHTML = WIN_SMILEY
-   }
    if (!gLives.length) {
-      pauseTimer()
+      renderMinedCells(gMines)
       gGame.isWin = false
       gGame.isOn = false
+      pauseTimer()
       elSmiley.innerHTML = DEAD_SMILEY
+   }
+   else if (gLevel.mines == gGame.markCount) {
+      gGame.isWin = true
+      gGame.isOn = false
+      pauseTimer()
+      elSmiley.innerHTML = WIN_SMILEY
+   }
+   else if (gGame.shownCount == (gLevel.size**2)) {
+      gGame.isWin = true
+      gGame.isOn = false
+      pauseTimer()
+      elSmiley.innerHTML = WIN_SMILEY
    }
 }
 
 
 function resetGame() {
-   window.localStorage.removeItem('bestScore')
    gGame = {
       isOn: false,
-      isWin: false,
       shownCount: 0,
       markCount: 0,
-      secsPassed: 0,
+      isCustom: gGame.isCustom,
+      isSafe: false,
+      isWin: false,
+      isHint: false,
+   }
+   gUndo = {
+      cellInf: [],
+      boardStat: []
    }
    gBoard = []
    gMines = []
    gLives = []
+   gHints = []
+   gFlagCounter = 0
+   gHintCount = 3
    resetTimer()
    initGame()
 }
@@ -88,4 +107,15 @@ function renderLives(lives) {
       strHTML += LIFE
    }
    elLives.innerHTML = strHTML
+}
+
+
+function toggleCustomMode() {
+   if (!gGame.isCustom) {
+      gGame.isCustom = true
+      gMinesToPlace = gLevel.mines
+   } 
+   // else {
+
+   // }
 }
